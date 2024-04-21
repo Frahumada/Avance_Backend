@@ -1,4 +1,7 @@
 
+
+
+
 class ProductManager {
   constructor() {
     this.products = [];
@@ -25,7 +28,6 @@ class ProductManager {
   deletePrductByCode(code) {
     let productToDelete = this.#getPrductByCode(code);
     let indexToDelete = this.products.indexOf(productToDelete);
-    console.log("INDEX: " + indexToDelete + " (" + productToDelete.code + ")");
     if (productToDelete) {
         this.products.splice(indexToDelete, 1);
       console.log("PRODUCTO ELIMINADO (" + productToDelete.code + ")");
@@ -64,14 +66,31 @@ class ProductManager {
     });
     return maxId;
   }
+}
 
+
+function showTitle(title) {
+  const large = title.length;
+  const maxCharacter = 70;
+
+  if (large > maxCharacter) {
+    console.log("* " + title + " *");
+  } else {
+    const tab = Math.round((maxCharacter - large) / 2);
+    const equalLine = '='.repeat(maxCharacter);
+    const spaceLine = ' '.repeat(tab);
+    
+    console.log(equalLine);
+    console.log(spaceLine + title + spaceLine);
+    console.log(equalLine);
+  }
 }
 
 //create a new productManager
 const productManager = new ProductManager();
 
 //add new products 
-console.log("============= Add new products =============")
+showTitle("Add new products")
 
 productManager.addProduct(
   "Tablet",
@@ -107,13 +126,12 @@ productManager.addProduct(
 );
 
 //listing products
-console.log("============= Show products =============")
+showTitle("Show products");
 const lista = productManager.getProducts();
 console.log(lista);
 
 //Add an existing product
-
-console.log("============= Add an existing product =============")
+showTitle("Add an existing product")
 productManager.addProduct(
   "Cartucho",
   "Articulo de impresion",
@@ -124,26 +142,26 @@ productManager.addProduct(
 );
 
 //show the product list
-console.log("============= Show products =============")
+showTitle("Show products")
 console.log(lista);
 
 //Delete an unexisting product and an existing product
-console.log("============= Delete an unexisting product =============")
+showTitle("Delete an unexisting product")
 productManager.deletePrductByCode(111);
 
-console.log("============= Delete an existing product =============")
+showTitle("Delete an existing product")
 productManager.deletePrductByCode(125);
 
 
 //get a product by ID
-console.log("============= Get an existing product by ID =============")
+showTitle("Get an existing product by ID")
 const traerProductoPorId = productManager.getPrductById(2)
 console.log(traerProductoPorId)
 
-console.log("============= Get an unexisting product by ID =============")
+showTitle("Get an unexisting product by ID")
 const traerSegundoProductoPorId = productManager.getPrductById(7)
 console.log(traerSegundoProductoPorId)
 
 //show the product list
-console.log("============= Show products =============")
+showTitle("Show products")
 console.log(lista);
