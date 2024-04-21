@@ -25,7 +25,6 @@ class ProductManager {
   deletePrductByCode(code) {
     let productToDelete = this.#getPrductByCode(code);
     let indexToDelete = this.products.indexOf(productToDelete);
-    let auxProducts = [];
     console.log("INDEX: " + indexToDelete + " (" + productToDelete.code + ")");
     if (productToDelete) {
         this.products.splice(indexToDelete, 1);
@@ -41,7 +40,7 @@ class ProductManager {
 
   getPrductById(productId) {
     if (this.products.find((product) => product.id === productId)) {
-      return true;
+      return this.products.find((product) => product.id === productId)
     } else {
       console.log("Error! product not found");
       return false;
@@ -66,19 +65,14 @@ class ProductManager {
     return maxId;
   }
 
-  #validateCode(codeProduct) {
-    if (!this.products.find((product) => product.code === codeProduct)) {
-      return codeProduct;
-    } else {
-      return false;
-    }
-  }
 }
 
 //create a new productManager
 const productManager = new ProductManager();
 
 //add new products 
+console.log("============= Add new products =============")
+
 productManager.addProduct(
   "Tablet",
   "Articulo de tecnologia",
@@ -113,10 +107,13 @@ productManager.addProduct(
 );
 
 //listing products
+console.log("============= Show products =============")
 const lista = productManager.getProducts();
 console.log(lista);
 
 //Add an existing product
+
+console.log("============= Add an existing product =============")
 productManager.addProduct(
   "Cartucho",
   "Articulo de impresion",
@@ -127,11 +124,26 @@ productManager.addProduct(
 );
 
 //show the product list
-console.log("=============================================");
+console.log("============= Show products =============")
 console.log(lista);
 
 //Delete an unexisting product and an existing product
+console.log("============= Delete an unexisting product =============")
 productManager.deletePrductByCode(111);
+
+console.log("============= Delete an existing product =============")
 productManager.deletePrductByCode(125);
 
+
+//get a product by ID
+console.log("============= Get an existing product by ID =============")
+const traerProductoPorId = productManager.getPrductById(2)
+console.log(traerProductoPorId)
+
+console.log("============= Get an unexisting product by ID =============")
+const traerSegundoProductoPorId = productManager.getPrductById(7)
+console.log(traerSegundoProductoPorId)
+
+//show the product list
+console.log("============= Show products =============")
 console.log(lista);
