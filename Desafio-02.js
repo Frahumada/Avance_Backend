@@ -6,7 +6,7 @@ class ProductManager {
     this.products = path;
   }
 
-  async addProduct(title, description, price, thumbnail, code, stock) {
+  addProduct = async(title, description, price, thumbnail, code, stock) => {
     const product = {
       id: this.#getMaxId() + 1,
       title,
@@ -18,9 +18,14 @@ class ProductManager {
     };
 
     try {
+      //Obtener productos
       const products = await this.getProducts();
+
+      //Valido que no este repetido el producto
       if (!this.#getPrductByCode(product.code)) {
         products.push(product);
+
+        //guardo productos actualizado
         await fs.promises.writeFile(this.path, JSON.stringify(products));
         console.log("PRODUCTO AGREGADO (" + product.code + ")");
       } else {
@@ -28,13 +33,21 @@ class ProductManager {
           "Error! This code (" + product.code + ") is already exists"
         );
       }
+
+      //Valido que los campos esten completos
+      if (
+        Object.values(products).includes("") ||
+        Object.values(products).includes(null)
+      ) {
+        console.log("Los campos no deben estar vacios");
+      }
     } catch (error) {
       console.log(error);
     }
   }
 
-  async deletePrductByCode(code) {
-    try {
+  deletePrductByCode = async(code) => {
+
       const products = await this.getProducts();
       let productToDelete = this.#getPrductByCode(code);
       let indexToDelete = products.indexOf(productToDelete);
@@ -45,12 +58,9 @@ class ProductManager {
       } else {
         console.log("Error! This code (" + code + ") is not added");
       }
-    } catch (error) {
-      console.log(error);
     }
-  }
 
-  async getProducts() {
+  getProducts = async () => {
     try {
       if (fs.existsSync(this.path)) {
         const products = await fs.promises.readFile(this.path, "utf8");
@@ -61,37 +71,28 @@ class ProductManager {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  async getPrductById(productId) {
-    try {
-      const products = await this.getProducts();
-      if (products.find((product) => product.id === productId)) {
-        return products.find((product) => product.id === productId);
-      } else {
-        console.log("Error! product not found");
-        return false;
-      }
-    } catch (error) {
-      console.log(error);
+  getPrductById = async (productId) => {
+    const products = await this.getProducts();
+    if (products.find((product) => product.id === productId)) {
+      return products.find((product) => product.id === productId);
+    } else {
+      console.log("Error! product not found");
+      return false;
     }
-  }
+  };
 
-  async #getPrductByCode(productCode) {
-    try {
+  #getPrductByCode = async(productCode) => {
       const products = await this.getProducts();
       if (products.find((product) => product.code === productCode)) {
         return products.find((product) => product.code === productCode);
       } else {
         return false;
       }
-    } catch (error) {
-      console.log(error);
-    }
   }
 
-  async #getMaxId() {
-    try {
+   #getMaxId = async() => {
       const products = await this.getProducts();
       let maxId = 0;
       products.map((product) => {
@@ -100,12 +101,9 @@ class ProductManager {
         }
         return maxId;
       });
-    } catch (error) {
-      console.log(error);
-    }
   }
 
-  async updateProduct(
+  updateProduct = async (
     productId,
     title = "",
     description = "",
@@ -113,8 +111,7 @@ class ProductManager {
     thumbnail = "",
     code = false,
     stock = false
-  ) {
-    try {
+  ) => {
       const products = await this.getProducts();
       const productToUpdate = this.getPrductById(productId);
       if (title) {
@@ -135,11 +132,9 @@ class ProductManager {
       products.push(productToUpdate);
       await fs.promises.writeFile(this.path, JSON.stringify(products));
       console.log("PRODUCTO MODIFICADO (" + productToUpdate.code + ")");
-    } catch (error) {
-      console.log(error);
     }
-  }
-}
+  };
+
 
 function showTitle(title) {
   const large = title.length;
@@ -161,14 +156,23 @@ function showTitle(title) {
 //create a new productManager
 const productManager = new ProductManager("./products.json");
 
+
+const test = async() => {
+
+//create a empty archive of the product
+await fs.promises.writeFile("./products.json","[]");
+
 //call "getProducts" to get an empty array
 showTitle("get an empty array");
-emptyList = productManager.getProducts();
+emptyList = await productManager.getProducts();
 console.log(emptyList);
 
 //add new product
 showTitle("Add new product");
-productManager.addProduct(
+
+//listing products
+
+await productManager.addProduct(
   "producto prueba",
   "Este es un producto prueba",
   200,
@@ -176,7 +180,7 @@ productManager.addProduct(
   "abc123",
   25
 );
-productManager.addProduct(
+await productManager.addProduct(
   "Tablet",
   "Articulo de tecnologia",
   150000,
@@ -184,7 +188,7 @@ productManager.addProduct(
   123,
   11
 );
-productManager.addProduct(
+await productManager.addProduct(
   "Celular",
   "Articulo de tecnologia",
   100000,
@@ -192,7 +196,7 @@ productManager.addProduct(
   124,
   5
 );
-productManager.addProduct(
+await productManager.addProduct(
   "SmartWatch",
   "Articulo de tecnologia",
   88000,
@@ -200,7 +204,7 @@ productManager.addProduct(
   125,
   15
 );
-productManager.addProduct(
+await productManager.addProduct(
   "Cartucho",
   "Articulo de impresion",
   12000,
@@ -211,35 +215,35 @@ productManager.addProduct(
 
 //listing products
 showTitle("Show products");
-const lista = productManager.getProducts();
+const lista = await productManager.getProducts();
 console.log(lista);
 
 //get a product by ID
 showTitle("Get an existing product by ID");
-const traerProductoPorId = productManager.getPrductById(2);
+const traerProductoPorId = await productManager.getPrductById(2);
 console.log(traerProductoPorId);
 
 showTitle("Get an unexisting product by ID");
-const traerSegundoProductoPorId = productManager.getPrductById(9999);
+const traerSegundoProductoPorId = await productManager.getPrductById(9999);
 console.log(traerSegundoProductoPorId);
 
 //Update a product
 showTitle("Update a product");
-productManager.updateProduct(
-  3,
-  (desciption = "SE CAMBIO LA DESCRIPCION DEL PRODUCTO CON ID = 3")
-);
+// await productManager.updateProduct(
+//   3,
+//   (desciption = "SE CAMBIO LA DESCRIPCION DEL PRODUCTO CON ID = 3")
+// );
 
 //Delete an unexisting product and an existing product
 showTitle("Delete an unexisting product");
-productManager.deletePrductByCode(111);
+await productManager.deletePrductByCode(111);
 
 showTitle("Delete an existing product");
-productManager.deletePrductByCode(125);
+await productManager.deletePrductByCode(125);
 
 //Add an existing product
 showTitle("Add an existing product");
-productManager.addProduct(
+await productManager.addProduct(
   "Cartucho",
   "Articulo de impresion",
   12000,
@@ -255,3 +259,7 @@ console.log(lista);
 //show the product list
 showTitle("Show products");
 console.log(lista);
+
+}
+
+test();
