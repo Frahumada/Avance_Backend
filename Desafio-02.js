@@ -7,8 +7,6 @@ class ProductManager {
     this.products = [];
   }
 
-
-
   addProduct = async (title, description, price, thumbnail, code, stock) => {
     const product = {
       id: (await this.#getMaxId()) + 1,
@@ -120,8 +118,6 @@ class ProductManager {
     const products = await this.getProducts();
     const productToUpdate = products.find((product) => product.id === productId);
     let flag = false;
-    console.log(field.toLowerCase());
-    console.log(content.toLowerCase());
     if (field.toLowerCase() == "title") {
       productToUpdate.title = content;
       flag = true;
