@@ -1,0 +1,1 @@
+console.log("Se ejecuta desde handlebars");

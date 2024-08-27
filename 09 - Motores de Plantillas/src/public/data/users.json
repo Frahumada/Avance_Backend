@@ -1,25 +1,4 @@
-import { Router } from "express";
-
-
-const router = Router();
-
-router.get('/', (req, res) => {
-    res.render('vista1', {layout: 'main2.handlebars'})
-});
-
-router.get('/vista2', (req, res) => {
-    res.render('vista2')
-});
-
-router.get('/vista3', (req, res) => {
-    let user = {
-        firstname: 'John',
-        lastname: 'Smith',
-    }
-    res.render('vista3', user);
-});
-//NO ESTA BIEN METER EL JSON DE ESTA FORMA PERO ES PARA PROBAR.
-const users = [
+[
     {
         "id": "3f07bb7f-cd21-42c9-b82a-a519a356d716",
         "firstname": "Pedro",
@@ -60,16 +39,14 @@ const users = [
         "lastname": "Lencina",
         "email": "Fl_21@gmail.com",
         "code": "RodrigoAutoriza"
+    },
+    {
+        "id": "c133727e-7496-4251-be2a-98b88d74adf0",
+        "username": "Claudia123",
+        "firstname": "Claudia",
+        "lastnames": "Ceballos",
+        "email": "ClaudiaCeballos2009@gmail.com",
+        "code": "RodrigoAutoriza",
+        "profile": "D:\\ESCRITORIOS\\ACTUAL\\Coder-House\\Backend\\Desafios\\01\\08 - Router y Multer\\03-multer\\src\\public\\images\\ig-logo.png"
     }
 ]
-
-
-router.get('/actividad', (req, res) => {
-    const random = Math.floor(Math.random()*6);
-    console.log(random);
-    const user = users[random]
-    console.log(user);
-    res.render('actividad',user);
-    });
-
-export default router;
