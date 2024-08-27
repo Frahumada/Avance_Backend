@@ -1,0 +1,13 @@
+[
+    {
+        "id": "3f07bb7f-cd21-42c9-b82a-a519a356d716",
+        "firstname": "Pedro",
+        "lastname": "Gomez",
+        "email": "Pgomez@gmail.com"
+    },
+    {
+        "id": "82bf2a52-7cbf-4023-aa70-54cebf5f9fa8",
+        "username": "Roman",
+        "email": "Rodriguero@gmail.com"
+    }
+]

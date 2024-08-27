@@ -1,0 +1,23 @@
+[
+    {
+        "firsName": "Juan",
+        "lastName": "Gomez",
+        "userName": "Usuario1",
+        "password": "63a84ab12255e4ec37d05e576204431623d7152483b3e117ddcf867ee90a92b6",
+        "salt": "G�q���0\b�4\u000b�C�Ӊ#\u0000�m��b�b\u0001��q��"
+    },
+    {
+        "firsName": "Rodrigo",
+        "lastName": "Ceballos",
+        "userName": "Usuario2",
+        "password": "752d530de935888c0b702a1fa257b22b8b934c6aa05a5df55b2132b417519fdc",
+        "salt": "�\r�\u0016�0��<XX�\u0016y��,�&X���\u0018<\u0012A����"
+    },
+    {
+        "firsName": "Franco",
+        "lastName": "Ahumada",
+        "userName": "Usuario3",
+        "password": "50bc3ab2c037678fadc019dd5b419114e7df42eb4ab4b63adaeebb77aa9095f8",
+        "salt": "��t�\u001a�`K��[�QI�cԒ5�����\u0002��$�$"
+    }
+]

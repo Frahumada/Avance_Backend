@@ -1,7 +1,8 @@
 import express from 'express';
-import products from './products.json' assert { type: 'json' };
-import users from './users.json' assert { type: 'json' };
+import ProductManager from './productManager';
+import { v4 as uuidv4 } from "uuid";
 
+const ProductManager = new ProductManager('./products.json');
 
 const app = express();
 
@@ -39,6 +40,8 @@ app.get('/products/:id', (req, res) => {
  
  
  })
+
+ 
 
 
 
