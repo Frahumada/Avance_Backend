@@ -45,23 +45,36 @@ export default class ProductManager {
   }
   async updateProduct(updates, idproduct) {
     try {
-        const exist = await this.getProductsById(idproduct); //Obtengo producto a actualizar
-        console.log("Existe el producto");
-        if (exist) { //Si existe obtenemos array de productos
-           const products = await this.getProducts();
-           console.log("Obtengo los productos");
-           const partialproducts = products.filter((prod) => prod.id !== exist.id) //filtro array para que quede sin el prod a actualizar
-           console.log("Filtro el array de productos");
-           const productUpdated = {...exist, ...updates}; //Merge de propiedades en un mismo objeto (Los de la derecha, pisan a los de la izquierda)
-           console.log("Actualizo el producto");
-           partialproducts.push(productUpdated); //guardo en el array parcial el objeto modificado
-           console.log("Meto prod en nuevo array");
-           await fs.promises.writeFile(this.path, JSON.stringify(partialproducts));
-           console.log("guardo nuevo array en archivo");
-           return exist;
-        }
+      const exist = await this.getProductsById(idproduct); //Obtengo producto a actualizar
+      if (exist) {
+        //Si existe obtenemos array de productos
+        const products = await this.getProducts();
+        const partialproducts = products.filter((prod) => prod.id !== exist.id); //filtro array para que quede sin el prod a actualizar
+        const productUpdated = { ...exist, ...updates }; //Merge de propiedades en un mismo objeto (Los de la derecha, pisan a los de la izquierda)
+        partialproducts.push(productUpdated); //guardo en el array parcial el objeto modificado
+        await fs.promises.writeFile(this.path, JSON.stringify(partialproducts));
+      }
+      return exist;
     } catch (error) {
-        console.log(error + "--> CATCH en update");
+      console.log(error + "--> CATCH en update");
+    }
+  }
+
+  async deleteProduct(idproduct) {
+    try {
+      const productToDelete = await this.getProductsById(idproduct); //Obtengo producto desde su ID
+      if (productToDelete) {
+        const products = await this.getProducts(); //Obtengo todos los productos
+        const partialproducts = products.filter(
+          (prod) => prod.id !== productToDelete.id
+        ); //filtro array para que quede sin el prod a eliminar
+        await fs.promises.writeFile(this.path, JSON.stringify(partialproducts)); //Escribo el nuevo array de productos
+      } else {
+        console.log(error + "--> No entro al true en el delete product");
+      }
+      return productToDelete;
+    } catch (error) {
+      console.log("Error deleting product");
     }
   }
 }

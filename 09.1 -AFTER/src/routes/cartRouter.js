@@ -4,62 +4,65 @@ const cartRouter = Router();
 import cartManager from "../managers/cart.manager.js";
 import { __dirname } from "../path.js";
 
+const cManager = new cartManager(`${__dirname}/db/carts.json`);
 
+cartRouter.post("/", async (req, res) => {
+  try {
+    const newCart = await cManager.createCart();
+    res.json(newCart);
+  } catch (error) {
+    next(error);
+  }
+});
 
-
-
+cartRouter.get("/:cid", async (req, res) => {
+  try {
+    const {cid} = req.params;
+    const cart = await cManager.getCartByID(cid);
+    if (!cart) res.status(404).json({ msg: "Cart not found ROUTER" });
+    else res.status(200).json(cart);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 cartRouter.get("/", async (req, res) => {
-    try {
-      const products = await userManager.getProduct();
-      res.status(200).json(products);
-    } catch (error) {
-      res.status(500).json({ msg: error.message });
+  try {
+    const carts = await cManager.getAllCarts();
+    const { limit } = req.query;
+    if (!limit) {
+      res.status(200).json(carts);
+    } else {
+      const parsedLimit = parseInt(limit, 10);
+      console.log(parsedLimit);
+      console.log(limit);
+      if (isNaN(parsedLimit) || parsedLimit < 0) {
+        res.status(404).json({ msg: "Invalid limit" });
+      } else {
+        const totalCarts = carts.splice(0, parsedLimit);
+        if (!totalCarts) {
+          res.json({ msg: "No existen carritos creados" });
+        } else {
+          res.status(200).json(totalCarts);
+        }
+      }
     }
-  });
-  
-//   cartRouter.post("/", async (req, res) => {
-//     try {
-//       const user = await userManager.createUser(req.body);
-//       res.status(201).json(user);
-//     } catch (error) {
-//       res.status(500).json({ msg: error.message });
-//     }
-//   });
-  
-//   cartRouter.get("/:id", async (req, res) => {
-//     try {
-//       const { id } = req.params;
-//       const user = await userManager.getUsersById(id);
-//       if (!user) res.status(404).json({ msg: "User not found" });
-//       else res.status(200).json(user);
-//     } catch (error) {
-//       res.status(500).json({ msg: error.message });
-//     }
-//   });
-  
-//   cartRouter.put("/:id", async (req, res) => {
-//     try {
-//       const { id } = req.params;
-//       const userUpd = await userManager.updateUser(req.body, id);
-//       if (!userUpd) res.status(404).json({ msg: "Error updating user" });
-//       else res.status(200).json(userUpd);
-//     } catch (error) {
-//       res.status(500).json({ msg: error.message });
-//     }
-//   });
-  
-//   cartRouter.delete("/:id", async (req, res) => {
-//     try {
-//       const { id } = req.params; //Obtengo id a buscar desde el endpoint
-//       const delUser = await userManager.deleteUser(id);
-//       console.log(delUser);
-//       if (!delUser) res.status(404).json({ msg: "Error delete user" });
-//       else res.status(200).json({ msg: `User id: ${id} deleted successfully` });
-//     } catch (error) {
-//       res.status(500).json({ msg: error.message });
-//     }
-//   });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+cartRouter.post ("/:cid/product/:pid", async (req, res) => {
+  try {
+    const { cid } = req.params;
+    const { pid } = req.params;
+    const response = await cManager.addProductToCart(cid, pid);
+    res.json(response);
+  } catch (error) {
+    console.error(error);
+  }
+})
 
 
-  export default cartRouter;
+
+export default cartRouter;

@@ -6,10 +6,21 @@ console.log(__dirname);
 
 import ProductManager from "../managers/product.manager.js";
 const productManager = new ProductManager(`${__dirname}/db/productos.json`);
-console.log(`${__dirname}/db/productos.json`);
 
 import { producValidator } from "../middlewares/productValidator.js";
 
+//CREAR PRODUCT
+productRouter.post("/", producValidator, async (req, res) => {
+  try {
+    const product = req.body;
+    const newProduct = await productManager.createProduct(product);
+    res.json(newProduct);
+  } catch (error) {
+    res.status(404).json({ msg: error.message });
+  }
+});
+
+//OBTENER PRODUCTS CON O SIN LIMITE DE PRODUCTS
 productRouter.get("/", async (req, res, next) => {
   try {
     //Obtengo todos los productos
@@ -38,35 +49,40 @@ productRouter.get("/", async (req, res, next) => {
   }
 });
 
+//OBTENER PRODUCT BY ID
 productRouter.get("/:idproduct", async (req, res) => {
   try {
     const { idproduct } = req.params;
     const product = await productManager.getProductsById(idproduct);
-    if (!product) res.status(404).json({msg: "Product not found"});
+    if (!product) res.status(404).json({ msg: "Product not found" });
     else res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
 });
 
-productRouter.post('/', producValidator, async(req,res) =>{
+//ACTUALIZAR PRODUCT BY ID
+productRouter.put("/:pid", async (req, res) => {
   try {
-    const product = req.body;
-    const newProduct = await productManager.createProduct(product);  
-    res.json(newProduct)
-  } catch (error) {
-    res.status(404).json({ msg: error.message });    
-  }
-})
-
-
-productRouter.put('/:pid',  async(req,res) =>{
-  try {
-    const {pid} = req.params; //guardo id recibido por params
+    const { pid } = req.params; //guardo id recibido por params
     const prodToUpdate = await productManager.updateProduct(req.body, pid);
-    return prodToUpdate;
+    if (prodToUpdate) return res.status(200).json(prodToUpdate);
+    else return res.status(404).json({ msg: error.message });
   } catch (error) {
-    res.status(404).json({ msg: error.message }); 
+    res.status(404).json({ msg: error.message });
+  }
+});
+
+//ELIMINAR PRODUCT BY ID
+productRouter.delete("/:pid", async (req, res) => {
+  try {
+    const { pid } = req.params; //guardo id recibido por params
+    const prodToDelete = await productManager.deleteProduct(pid);
+    if (prodToDelete) 
+      {return res.status(200).json(prodToDelete);}
+    else {return res.status(404).json({ msg: error.message });}
+  } catch (error) {
+    return res.status(404).json("Error catch - productRouter");
   }
 });
 
