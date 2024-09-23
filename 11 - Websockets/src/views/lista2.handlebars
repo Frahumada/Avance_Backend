@@ -1,0 +1,21 @@
+{{#if users.length}}
+
+    <ul class="list-group">
+        {{#each users}}
+            <div class="card m-3" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Nombre: {{firstname}}</li>
+                <li class="list-group-item">Apellido: {{lastname}}</li>
+                <li class="list-group-item">Email: {{email}}</li>
+            </ul>
+            </div>
+        {{/each }}
+    </ul>
+{{else }}
+<div class="alert alert-danger" role="alert">
+  El Array esta vacio
+</div>
+{{/if }}
+
+
+

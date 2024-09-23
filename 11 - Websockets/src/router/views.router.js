@@ -2,7 +2,12 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
+  res.render('websocket')
+});
+
+
+router.get("/vista1", (req, res) => {
   res.render("vista1", { layout: "main2.handlebars" });
 });
 
@@ -81,5 +86,7 @@ router.get("/lista2", (req, res) => {
 router.get("/lista2", (req, res) => {
   res.render("lista2", { users });
 });
+
+
 
 export default router;

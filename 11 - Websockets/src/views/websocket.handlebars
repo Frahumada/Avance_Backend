@@ -1,0 +1,40 @@
+
+<div class="container">
+    <div class="d-block">
+        <h3>SOCKET CLIENTE</h3>
+    </div>
+
+    <div class="card p-4">
+        <form id="form"></form>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Product:</span>
+                <input id="name" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Price:</span>
+                <input id="price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+            </div>
+            <div class="container d-flex">
+                <input type="button" class="btn btn-success m-1" value="SEND" id="buttonSend"/>
+                <input type="button" class="btn btn-danger m-1" value="DELETE" id="buttonDelete"/>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container card">
+    <table class="productsTable">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio</th>
+        </tr>
+    </thead>
+    <tbody id="productsTableRows">
+    </tbody>
+    </table>
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/index.js"></script>
