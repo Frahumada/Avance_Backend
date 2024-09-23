@@ -1,0 +1,52 @@
+[
+    {
+        "id": "3f07bb7f-cd21-42c9-b82a-a519a356d716",
+        "firstname": "Pedro",
+        "lastname": "Gomez",
+        "email": "Pgomez@gmail.com",
+        "code": "RodrigoAutoriza"
+    },
+    {
+        "id": "82bf2a52-7cbf-4023-aa70-54cebf5f9fa8",
+        "firstname": "Juan Roman",
+        "lastname": "Riquelme",
+        "email": "Jr_10@gmail.com"
+    },
+    {
+        "id": "5611579d-06a0-406b-bf91-3a04b156bf81",
+        "firstname": "Franco",
+        "lastname": "Ahumada",
+        "email": "Franco_Ahumada@gmail.com",
+        "code": "RodrigoAutoriza"
+    },
+    {
+        "id": "303ec328-3fc7-48bf-9af0-f85b9cac47c8",
+        "firstname": "Rodrigo",
+        "lastname": "Ceballos",
+        "email": "Rodrigo_Ceballos@gmail.com",
+        "code": "RodrigoAutoriza"
+    },
+    {
+        "id": "4247106d-dcb6-4963-be43-b16757d2c865",
+        "firstname": "Claudia",
+        "lastname": "Ceballos",
+        "email": "C_Ceballos@gmail.com",
+        "code": "RodrigoAutoriza"
+    },
+    {
+        "id": "ddc3cc85-eb96-461d-bc78-87bef7741004",
+        "firstname": "Felipe",
+        "lastname": "Lencina",
+        "email": "Fl_21@gmail.com",
+        "code": "RodrigoAutoriza"
+    },
+    {
+        "id": "c133727e-7496-4251-be2a-98b88d74adf0",
+        "username": "Claudia123",
+        "firstname": "Claudia",
+        "lastnames": "Ceballos",
+        "email": "ClaudiaCeballos2009@gmail.com",
+        "code": "RodrigoAutoriza",
+        "profile": "D:\\ESCRITORIOS\\ACTUAL\\Coder-House\\Backend\\Desafios\\01\\08 - Router y Multer\\03-multer\\src\\public\\images\\ig-logo.png"
+    }
+]

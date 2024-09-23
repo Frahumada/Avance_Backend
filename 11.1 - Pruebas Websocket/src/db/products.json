@@ -1,0 +1,72 @@
+[
+    {
+        "id": "d514b596-add5-4fd7-9242-681b84ad42d9",
+        "title": "Producto 2",
+        "description": "Esta es una descripcion por defecto",
+        "code": "porDefecto123",
+        "price": 5000,
+        "status": true,
+        "stock": 999,
+        "category": "Por defecto"
+    },
+    {
+        "id": "602f44c4-81f9-4902-ba34-f36ab644a6c7",
+        "title": "Producto 3",
+        "description": "Esta es una descripcion por defecto",
+        "code": "porDefecto123",
+        "price": 3000,
+        "status": true,
+        "stock": 999,
+        "category": "Por defecto"
+    },
+    {
+        "id": "3b9379b4-3666-468d-91b8-aceb36065b23",
+        "title": "Producto 4",
+        "description": "Esta es una descripcion por defecto",
+        "code": "porDefecto123",
+        "price": 10000,
+        "status": true,
+        "stock": 999,
+        "category": "Por defecto"
+    },
+    {
+        "id": "6b5816e0-c966-4e50-87df-7a75beac80a9",
+        "title": "Producto 5",
+        "description": "Esta es una descripcion por defecto",
+        "code": "porDefecto123",
+        "price": 10000,
+        "status": true,
+        "stock": 999,
+        "category": "Por defecto"
+    },
+    {
+        "id": "ecc465de-4b70-4b31-b25c-2fb3e86ef153",
+        "title": "Producto 6",
+        "description": "Esta es una descripcion por defecto",
+        "code": "porDefecto123",
+        "price": 10000,
+        "status": true,
+        "stock": 999,
+        "category": "Por defecto"
+    },
+    {
+        "id": "59f7249f-4697-40e8-a1b3-da8ee4abf2f1",
+        "title": "Producto 7",
+        "description": "Esta es una descripcion por defecto",
+        "code": "porDefecto123",
+        "price": 7000,
+        "status": true,
+        "stock": 999,
+        "category": "Por defecto"
+    },
+    {
+        "id": "251eaee4-695b-4460-9028-af94ae1cd3b7",
+        "title": "Producto 8",
+        "description": "Esta es una descripcion por defecto",
+        "code": "porDefecto123",
+        "price": 10000,
+        "status": true,
+        "stock": 999,
+        "category": "Por defecto"
+    }
+]

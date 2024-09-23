@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="d-block">
+        <h3>SOCKET CLIENTE</h3>
+    </div>
+
+    <div class="card p-4">
+        <form id="form"></form>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Product:</span>
+            <input id="name" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Cantidad:</span>
+            <input id="quantity" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+        </div>
+        <div class="btn-group container px-5" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-success" id="buttonSend">SEND</button>
+            <button type="button" class="btn btn-danger " id="buttonDelete">DELETE</button>
+        </div>
+        </form>
+    </div>
+    <div class="container card p-4">
+        <table class="productsTable table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio u.</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio final</th>
+                </tr>
+            </thead>
+            <tbody id="productsTableRows">
+            </tbody>
+            <tfoot id="totales">
+                <td scope="col">#</td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td id="quantityTotal" scope="col"></td>
+                <td id="priceTotal" scope="col"></td>
+            </tfoot>
+
+        </table>
+    </div>
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/index.js"></script>
