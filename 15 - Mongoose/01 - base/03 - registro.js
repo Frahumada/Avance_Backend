@@ -23,9 +23,7 @@ const test = async () => {
     password: "UnaClave",
     age: 30,
   };
-
-  console.log(newUser);
-
+  
   await createUser(newUser);
   console.log("Usuario creado");
 };
